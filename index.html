@@ -11,28 +11,76 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        white-space: nowrap;
         font-size: 24px;
         font-weight: bold;
         color: #ff69b4;
-        animation: moveText 6s linear infinite;
+        white-space: nowrap;
         z-index: 10;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
         pointer-events: none;
       }
 
-      @keyframes moveText {
-        0% {
-          transform: translate(-50%, -50%) translateX(-100%);
-        }
-        100% {
-          transform: translate(-50%, -50%) translateX(100%);
-        }
+      .visible {
+        opacity: 1;
+      }
+
+      /* Đảm bảo không chiếm chỗ khi ẩn */
+      .hidden {
+        display: none;
+      }
+
+      .shown {
+        display: block;
       }
     </style>
   </head>
   <body>
-    <div class="center-text">💖 Chúc mừng sinh nhật em yêu 💖</div>
+    <!-- Hai dòng chữ thay phiên -->
+    <div class="center-text visible shown" id="text1">💖 Chúc mừng sinh nhật em yêu 💖</div>
+    <div class="center-text hidden" id="text2">🎉 19/07/2025 🎉</div>
+
     <canvas id="pinkboard"></canvas>
     <script src="pink heart.js"></script>
+
+    <script>
+      const text1 = document.getElementById("text1");
+      const text2 = document.getElementById("text2");
+
+      let showingText1 = true;
+
+      setInterval(() => {
+        if (showingText1) {
+          // Ẩn text1 từ từ
+          text1.classList.remove("visible");
+          setTimeout(() => {
+            // Ẩn hoàn toàn text1
+            text1.classList.add("hidden");
+            text1.classList.remove("shown");
+
+            // Hiện text2 từ từ
+            text2.classList.remove("hidden");
+            text2.classList.add("shown");
+            setTimeout(() => {
+              text2.classList.add("visible");
+            }, 50); // delay nhỏ để browser nhận display thay đổi
+          }, 1000);
+        } else {
+          text2.classList.remove("visible");
+          setTimeout(() => {
+            text2.classList.add("hidden");
+            text2.classList.remove("shown");
+
+            text1.classList.remove("hidden");
+            text1.classList.add("shown");
+            setTimeout(() => {
+              text1.classList.add("visible");
+            }, 50);
+          }, 1000);
+        }
+
+        showingText1 = !showingText1;
+      }, 5000);
+    </script>
   </body>
 </html>

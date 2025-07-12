@@ -12,7 +12,7 @@ canvas {
   height: 100%;
 }
 
-/* Dòng chữ chạy giữa trái tim */
+/* Dòng chữ giữa trái tim */
 .center-text {
   position: absolute;
   top: 50%;
@@ -22,16 +22,20 @@ canvas {
   font-size: 24px;
   font-weight: bold;
   color: #ff69b4;
-  animation: moveText 6s linear infinite;
+  opacity: 0;
+  animation: fadeIn 3s ease-in-out forwards;
   z-index: 10;
   pointer-events: none;
 }
 
-@keyframes moveText {
+/* Hiệu ứng hiện ra từ từ */
+@keyframes fadeIn {
   0% {
-    transform: translate(-50%, -50%) translateX(-100%);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
   }
   100% {
-    transform: translate(-50%, -50%) translateX(100%);
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
