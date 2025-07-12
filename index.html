@@ -5,9 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pink heart.css" />
     <title>Pink heart</title>
+    <style>
+      .center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff69b4;
+        animation: moveText 6s linear infinite;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      @keyframes moveText {
+        0% {
+          transform: translate(-50%, -50%) translateX(-100%);
+        }
+        100% {
+          transform: translate(-50%, -50%) translateX(100%);
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- tiktok meowish -->
+    <div class="center-text">💖 Chúc mừng sinh nhật em yêu 💖</div>
     <canvas id="pinkboard"></canvas>
     <script src="pink heart.js"></script>
   </body>
